@@ -1,7 +1,8 @@
-class Bolera:
+class Bowls:
     #Variables Globales  definidas#
-    pleno = 10
+    strike = 10
     nulo = 0
+    spare = 0
     ultimo_numero = 0
     
     def __init__(self,puntos):
@@ -13,31 +14,47 @@ class Bolera:
         for roll in rolls:
             if roll.isdigit():
                 valor_total += int(roll)
-                Bolera.ultimo_numero = int(roll)
+                Bowls.ultimo_numero = int(roll)
             if roll == '-':
-                Bolera.ultimo_numero = 0
+                Bowls.ultimo_numero = 0
             if roll == 'X':
-                valor_total += Bolera.pleno
+                valor_total += Bowls.strike
             if roll == '/':
-                valor_total += (Bolera.pleno - int(Bolera.ultimo_numero))
+                valor_total += (Bowls.strike - int(Bowls.ultimo_numero))
         return valor_total
     
     def calcular_puntos(self):
-        puntuación_final = 0
-        cantidad_tiradas = 0
-        cantidad_tiradas_frame = 0
+        puntuacion_total = 0
+        numero_tiradas = 0
+        numero_tiradas_frame = 0
         frame = 0
         for numero in self.puntos:
             if frame == 9:
-                puntuación_final += Bolera.sumas_especiales(self.puntos[cantidad_tiradas:])
-                return puntuación_final
+                puntuacion_total += Bowls.sumas_especiales(self.puntos[numero_tiradas:])
+                return puntuacion_total
             if numero.isdigit():
-                puntuacion_final += int(numero)
-                Bolera.ultimo_numero = numero
-                if cantidad_tiradas_frame > 0:
-                    cantidad_tiradas_frame = 0
+                puntuacion_total += int(numero)
+                Bowls.ultimo_numero = numero
+                if numero_tiradas_frame > 0:
+                    numero_tiradas_frame = 0
                     frame += 1
                 else:
-                    cantidad_tiradas_frame += 1
-                cantidad_tiradas +=1
-        #Hasta aquí#
+                    numero_tiradas_frame += 1
+                numero_tiradas +=1
+            if numero == '-':
+                Bowls.ultimo_numero = 0
+                if numero_tiradas_frame > 0:
+                    numero_tiradas_frame = 0
+                    frame += 1
+                else:
+                    numero_tiradas_frame += 1
+                numero_tiradas +=1
+            if numero == 'X':
+                puntuacion_total += Bowls.sumas_especiales(self.puntos[numero_tiradas: numero_tiradas+3])
+                numero_tiradas +=1
+                frame += 1
+            if numero == '/':
+                puntuacion_total += Bowls.sumas_especiales(self.puntos[numero_tiradas: numero_tiradas+2])
+                numero_tiradas+=1
+                numero_tiradas_frame = 0
+                frame += 1
