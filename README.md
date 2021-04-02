@@ -12,3 +12,6 @@
 - Si se ejecuta un strike el jugador tendrá dos tiradas extra y la puntuación del frame será de 10 + los pins tirados en las dos siguientes tiradas.
 - Este bonus solo puede ocurrir una vez (esto es, da igual que en la tirada extra vuelvas a hacer strike, no tendrás más tiradas extra, simplemente se sumará la puntuación de los 10 bolos tirados al frame.
 - La puntuación total de la partida es la suma de las puntuaciones de los frames.
+
+## Colaboración de Victor Porlan Soto
+- https://github.com/VictorPorlan
